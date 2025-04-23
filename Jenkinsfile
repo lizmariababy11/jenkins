@@ -21,7 +21,7 @@ pipeline {
                 script {
                     try {
                         echo "Running tests..."
-                        sh 'echo Tests successful'
+                        sh 'exit 3'
                     } catch (e) {
                         echo "Stage 2 failed: ${e}"
                     }
