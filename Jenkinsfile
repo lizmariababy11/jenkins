@@ -7,10 +7,10 @@ pipeline {
                 script {
                     try {
                         echo "Running build step..."
-                        sh 'exit 1' // Simulating failure
+                        sh 'exit 1' 
                     } catch (e) {
                         echo "Stage 1 failed: ${e}"
-                        currentBuild.result = 'UNSTABLE' // Optional: mark as unstable
+                        currentBuild.result = 'UNSTABLE'
                     }
                 }
             }
@@ -34,7 +34,7 @@ pipeline {
                 script {
                     try {
                         echo "Deploying..."
-                        sh 'exit 1' // Simulating another failure
+                        sh 'exit 1'
                     } catch (e) {
                         echo "Stage 3 failed: ${e}"
                     }
@@ -45,7 +45,7 @@ pipeline {
 
     post {
         always {
-            echo "Pipeline completed (some stages may have failed)."
+            echo "Pipeline completed (some stages may have failed.refer logs)."
         }
     }
 }
