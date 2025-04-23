@@ -34,7 +34,7 @@ pipeline {
                 script {
                     try {
                         echo "Deploying..."
-                        sh 'exit 1'
+                        sh 'exit 2'
                     } catch (e) {
                         echo "Stage 3 failed: ${e}"
                     }
