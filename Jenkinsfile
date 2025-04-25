@@ -2,50 +2,55 @@ pipeline {
     agent any
 
     stages {
-        stage('Stage 1 - Build') {
+        stage('Checkout') {
             steps {
-                script {
-                    try {
-                        echo "Running build step..."
-                        sh 'exit 1' 
-                    } catch (e) {
-                        echo "Stage 1 failed: ${e}"
-                        currentBuild.result = 'UNSTABLE'
-                    }
-                }
+                // Checkout the code from the Git repository (abc)
+                echo "Cloning repository jenkins..."
+                git branch: 'main', url: 'https://github.com/lizmariababy11/jenkins.git'
             }
         }
 
-        stage('Stage 2 - Test') {
+        stage('Modify File') {
             steps {
-                script {
-                    try {
-                        echo "Running tests..."
-                        sh 'echo Tests are successful'
-                    } catch (e) {
-                        echo "Stage 2 failed: ${e}"
-                    }
-                }
+                // Append content to helloworld.sh file
+                echo "Copying helloworld.sh to helloworld_modified.sh..."
+                sh 'echo "cat >> helloworld.sh" >> helloworld.sh'
             }
         }
 
-        stage('Stage 3 - Deploy') {
+        stage('Commit Changes') {
             steps {
-                script {
-                    try {
-                        echo "Deploying..."
-                        sh 'exit 2'
-                    } catch (e) {
-                        echo "Stage 3 failed: ${e}"
-                    }
-                }
+                // Set Git user credentials and commit changes
+                echo "Committing changes..."
+                sh '''
+                git config user.name "lizmariababy11"
+                git config user.email "lizmariababyj@gmail.com"
+                git add helloworld.sh
+                git commit -m "Modified helloworld.sh by appending text"
+                git push origin main
+                '''
+            }
+        }
+
+        stage('Test') {
+            steps {
+                // Placeholder for tests
+                echo "Running tests..."
+                sh 'echo Tests are successful'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                // Placeholder for deployment
+                echo "Deploying..."
             }
         }
     }
 
     post {
         always {
-            echo "Pipeline completed (some stages may have failed.refer logs)."
+            echo "Pipeline completed"
         }
     }
 }
