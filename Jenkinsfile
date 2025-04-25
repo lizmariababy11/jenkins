@@ -2,55 +2,50 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage('Stage 1 - Build') {
             steps {
-                // Checkout the code from the Git repository (abc)
-                echo "Cloning repository jenkins..."
-                git branch: 'main', url: 'https://github.com/lizmariababy11/jenkins.git'
+                script {
+                    try {
+                        echo "Running build step..."
+                        sh 'exit 1' 
+                    } catch (e) {
+                        echo "Stage 1 failed: ${e}"
+                        currentBuild.result = 'UNSTABLE'
+                    }
+                }
             }
         }
 
-        stage('Modify File') {
+        stage('Stage 2 - Test') {
             steps {
-                // Append content to helloworld.sh file
-                echo "Copying helloworld.sh to helloworld_modified.sh..."
-                sh 'echo "cat >> helloworld.sh" >> helloworld.sh'
+                script {
+                    try {
+                        echo "Running tests..."
+                        sh 'echo Tests are successful'
+                    } catch (e) {
+                        echo "Stage 2 failed: ${e}"
+                    }
+                }
             }
         }
 
-        stage('Commit Changes') {
+        stage('Stage 3 - Deploy') {
             steps {
-                // Set Git user credentials and commit changes
-                echo "Committing changes..."
-                sh '''
-                git config user.name "lizmariababy11"
-                git config user.email "lizmariababyj@gmail.com"
-                git add helloworld.sh
-                git commit -m "Modified helloworld.sh by appending text"
-                git push origin main
-                '''
-            }
-        }
-
-        stage('Test') {
-            steps {
-                // Placeholder for tests
-                echo "Running tests..."
-                sh 'echo Tests are successful'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                // Placeholder for deployment
-                echo "Deploying..."
+                script {
+                    try {
+                        echo "Deploying..."
+                        sh 'exit 2'
+                    } catch (e) {
+                        echo "Stage 3 failed: ${e}"
+                    }
+                }
             }
         }
     }
 
     post {
         always {
-            echo "Pipeline completed"
+            echo "Pipeline completed (some stages may have failed.refer logs)."
         }
     }
 }
