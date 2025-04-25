@@ -13,8 +13,8 @@ pipeline {
         stage('Modify File') {
             steps {
                 // Append content to helloworld.sh file
-                echo "Modifying the helloworld.sh file..."
-                sh 'echo "cat >> Modified_helloworld.sh" >> helloworld.sh'
+                echo "Copying helloworld.sh to helloworld_modified.sh..."
+                sh 'cp helloworld.sh helloworld_modified.sh
             }
         }
 
@@ -25,7 +25,7 @@ pipeline {
                 sh '''
                 git config user.name "jenkins"
                 git config user.email "lizmariababyj@gmail.com"
-                git add helloworld.sh
+                git add helloworld_modified.sh
                 git commit -m "Modified helloworld.sh by appending text"
                 git push origin main
                 '''
