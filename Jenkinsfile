@@ -23,7 +23,7 @@ pipeline {
                 // Set Git user credentials and commit changes
                 echo "Committing changes..."
                 sh '''
-                git config user.name "jenkins"
+                git config user.name "lizmariababy11"
                 git config user.email "lizmariababyj@gmail.com"
                 git add helloworld_modified.sh
                 git commit -m "Modified helloworld.sh by appending text"
