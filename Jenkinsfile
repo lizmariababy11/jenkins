@@ -14,7 +14,7 @@ pipeline {
             steps {
                 // Append content to helloworld.sh file
                 echo "Copying helloworld.sh to helloworld_modified.sh..."
-                sh 'echo "cat >> helloworld.sh" >> helloworld.sh'
+                sh 'echo "HeyABC >> helloworld.sh"'
             }
         }
 
