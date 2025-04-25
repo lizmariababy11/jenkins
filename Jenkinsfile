@@ -14,7 +14,7 @@ pipeline {
             steps {
                 // Append content to helloworld.sh file
                 echo "Copying helloworld.sh to helloworld_modified.sh..."
-                sh 'cp helloworld.sh helloworld_modified.sh
+                sh 'echo "cat >> helloworld.sh" >> helloworld.sh'
             }
         }
 
@@ -25,7 +25,7 @@ pipeline {
                 sh '''
                 git config user.name "lizmariababy11"
                 git config user.email "lizmariababyj@gmail.com"
-                git add helloworld_modified.sh
+                git add helloworld.sh
                 git commit -m "Modified helloworld.sh by appending text"
                 git push origin main
                 '''
