@@ -6,7 +6,11 @@ pipeline {
             steps {
                 // Checkout the code from the Git repository (abc)
                 echo "Cloning repository jenkins..."
-                sh 'ssh-keyscan github.com >> ~/.ssh/known_hosts'
+                sh '''
+                      mkdir -p /var/lib/jenkins/.ssh
+                      ssh-keyscan github.com >> /var/lib/jenkins/.ssh/known_hosts
+                      chmod 644 /var/lib/jenkins/.ssh/known_hosts
+                    '''
                 git branch: 'main', url: 'git@github.com:lizmariababy11/jenkins.git'
             }
         }
