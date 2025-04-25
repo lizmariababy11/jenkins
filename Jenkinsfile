@@ -6,7 +6,7 @@ pipeline {
             steps {
                 // Checkout the code from the Git repository (abc)
                 echo "Cloning repository jenkins..."
-                git branch: 'main', url: 'https://github.com/lizmariababy11/jenkins.git'
+                git branch: 'main', url: 'git@github.com:lizmariababy11/jenkins.git'
             }
         }
 
