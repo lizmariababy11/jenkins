@@ -6,6 +6,7 @@ pipeline {
             steps {
                 // Checkout the code from the Git repository (abc)
                 echo "Cloning repository jenkins..."
+                sh 'ssh-keyscan github.com >> ~/.ssh/known_hosts'
                 git branch: 'main', url: 'git@github.com:lizmariababy11/jenkins.git'
             }
         }
